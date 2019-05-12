@@ -1,10 +1,16 @@
 // Navbar module
 .navbar {
+  background-color: map-get($colors, lightgray);
+  padding: 5px 30px;
+
   &__item {
     text-decoration: none;
+    color: map-get($colors, gray);
+    margin: 10px;
   }
 
   &__item--active {
     font-weight: 700;
+    color: map-get($colors, darkgray);
   }
 }

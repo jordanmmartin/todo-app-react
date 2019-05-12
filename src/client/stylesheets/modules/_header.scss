@@ -1,4 +1,15 @@
 // Header module
 .header {
   background-color: map-get($colors, primary);
+  padding: 15px 40px;
+
+
+}
+
+.header a {
+  text-decoration: none;
+  color: map-get($colors, ui-light);
+  font-size: 30px;
+  // font-family:  map-get($fonts, primary);
+  font-weight: 200;
 }

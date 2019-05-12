@@ -1,6 +1,8 @@
 // Global layout.
 body {
   background: map-get($colors, ui-light);
+  margin: 0;
+  font-family: Helvetica, Sans-Serif;
 }
 
 .container {
