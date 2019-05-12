@@ -6,50 +6,65 @@ import Todo from './todo';
 
 const noop = () => {};
 
+
 /**
  * Prop Types
  * @private
  */
-const propTypes = {
-  filterBy: PropTypes.string,
-  todos: PropTypes.arrayOf(PropTypes.object),
-  updateTodos: PropTypes.func,
-};
+// const propTypes = {
+//   filterBy: PropTypes.string,
+//   todos: PropTypes.arrayOf(PropTypes.object),
+//   updateTodos: PropTypes.func,
+// };
 
 /**
  * Default Props
  * @private
  */
-const defaultProps = {
-  filterBy: '',
-  todos: [],
-  updateTodos: noop,
-};
+// const defaultProps = {
+//   filterBy: '',
+//   todos: [],
+//   updateTodos: noop,
+// };
 
 /**
  * Todos component
  * @returns {ReactElement}
  */
-const Todos = ({ filterBy, todos, updateTodos }) => {
+
+//Changed Todos to a class component so it would trigger rerenders when passed new props
+// const Todos = ({ filterBy, todos, updateTodos }) => {
+class Todos extends React.Component {
+
   /**
    * Base CSS class
    */
-  const baseCls = 'todos';
+  static baseCls = 'todos';
+
+  /**
+   * Prop Types
+   * @static
+   */
+  static propTypes = {
+    filterBy: PropTypes.string,
+    todos: PropTypes.arrayOf(PropTypes.object),
+    updateTodos: PropTypes.func,
+  };
 
   /**
    * Callback function to delete todo from todos collection
    *
    * @param  {object} json - Resulting JSON from fetch
    */
-  const deleteTodo = json => {
-    const index = todos.findIndex(todo => {
+  deleteTodo = json => {
+    const index = this.props.todos.findIndex(todo => {
       return todo.id === json.id;
     });
 
-    updateTodos(
+    this.props.updateTodos(
       [
-        ...todos.slice(0, index),
-        ...todos.slice(index + 1),
+        ...this.props.todos.slice(0, index),
+        ...this.props.todos.slice(index + 1),
       ]
     );
   }
@@ -59,16 +74,16 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    *
    * @param  {object} json - Resulting JSON from fetch
    */
-  const putTodo = json => {
-    const index = todos.findIndex(todo => {
+  putTodo = json => {
+    const index = this.props.todos.findIndex(todo => {
       return todo.id === json.id;
     });
 
-    updateTodos(
+    this.props.updateTodos(
       [
-        ...todos.slice(0, index),
+        ...this.props.todos.slice(0, index),
         json,
-        ...todos.slice(index + 1),
+        ...this.props.todos.slice(index + 1),
       ]
     );
   }
@@ -79,8 +94,8 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    *
    * @param {object} todo - Todo object
    */
-  const onClickDelete = todo => {
-    api('DELETE', todo, deleteTodo);
+  onClickDelete = todo => {
+    api('DELETE', todo, this.deleteTodo);
   };
 
   /**
@@ -89,7 +104,7 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    *
    * @param {object} todo - Todo object
    */
-  const onClickTodo = todo => {
+  onClickTodo = todo => {
     const newTodo = Object.assign({}, todo);
     newTodo.status = todo.status === 'complete' ? 'active' : 'complete';
     newTodo.archive = false;
@@ -102,14 +117,14 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
    *
    * @returns {Array} - Returns an array of Todo React Elements
    */
-  const renderTodos = () => {
-    if (!Array.isArray(todos)) {
+  renderTodos = () => {
+    if (!Array.isArray(this.props.todos)) {
       return null;
     }
 
-    return todos.map(todo => {
+    return this.props.todos.map(todo => {
       let filtered;
-      switch (filterBy) {
+      switch (this.props.filterBy) {
         case 'active':
           filtered = todo.status === 'complete';
           break;
@@ -124,8 +139,10 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
         <Todo
           key={todo.id}
           filtered={filtered}
-          onClickDelete={onClickDelete.bind(this, todo)}
-          onClickTodo={onClickTodo.bind(this, todo)}
+          // onClickDelete={onClickDelete.bind(this, todo)}
+          onClickDelete={this.onClickDelete.bind(this, todo)}
+          // onClickTodo={onClickTodo.bind(this, todo)}
+          onClickTodo={this.onClickTodo.bind(this, todo)}
           status={todo.status}
           text={todo.text}
         />
@@ -133,14 +150,17 @@ const Todos = ({ filterBy, todos, updateTodos }) => {
     })
   }
 
-  return (
-    <ul className={baseCls}>
-      {renderTodos()}
-    </ul>
-  )
+  render() {
+    console.log('todos props', this.props)
+    return (
+      <ul className={this.baseCls}>
+        {this.renderTodos()}
+      </ul>
+    )
+  }
 };
 
-Todos.propTypes = propTypes;
-Todos.defaultProps = defaultProps;
+// Todos.propTypes = propTypes;
+// Todos.defaultProps = defaultProps;
 
 export default Todos;

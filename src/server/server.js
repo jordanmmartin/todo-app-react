@@ -22,16 +22,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/todos', (req, res) => {
-  res.json(JSON.stringify(todos));
+  res.send(JSON.stringify(todos));
 });
 
+
+//added parseInt to convert id in params from string to integer
 app.get('/todos/:id', (req, res) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   const index = todos.findIndex((todo) => {
     return todo.id === id;
   });
 
-  res.json(JSON.stringify(todos[index]));
+  res.send(JSON.stringify(todos[index]));
 });
 
 app.post('/todos', (req, res) => {
@@ -48,11 +50,23 @@ app.post('/todos', (req, res) => {
 
   todos.push(newTodo);
 
-  res.status(201).json(todos);
+  res.status(201).send(todos);
 });
 
 app.delete('/todos/:id', (req, res) => {
-  res.status(500).send({ message: 'not implemented' });
+  // res.status(500).send({ message: 'not implemented' });
+  const id = parseInt(req.params.id);
+  const index = todos.findIndex((todo) => {
+    return todo.id === id;
+  });
+  const todo = todos[index]
+  if (!todo) {
+    res.status(400).json({ message: 'The Todo with the given ID was not found' });
+    return;
+  }
+  todos.splice(index, 1);
+
+  res.status(200).send(todo);
 });
 
 app.put('/todos/:id', (req, res) => {
