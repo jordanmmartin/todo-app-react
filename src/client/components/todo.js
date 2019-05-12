@@ -4,6 +4,9 @@ import React from 'react';
 import Button from './button';
 import TodoLink from './todo-link';
 
+// import Icon from '@mdi/react'
+import { mdiCheck } from '@mdi/js'
+
 const noop = () => {};
 
 
@@ -47,8 +50,13 @@ const Todo = ({ filtered, onClickDelete, onClickTodo, status, text }) => {
 
   return (
     <li className={todoCls}>
-        <input type="checkbox" checked="checked"/>
-        <span class="checkmark"></span>
+    <div className="pretty p-icon p-rotate">
+        <input type="checkbox" />
+        <div className="state p-success">
+            <i className="icon mdi mdi-check"></i>
+            <label></label>
+        </div>
+    </div>
       <TodoLink text={text} onClick={onClickTodo} />
 
       <Button text="Delete" onClick={onClickDelete} />
