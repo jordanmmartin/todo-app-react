@@ -109,7 +109,7 @@ class Todos extends React.Component {
     newTodo.status = todo.status === 'complete' ? 'active' : 'complete';
     newTodo.archive = false;
 
-    api('PUT', newTodo, putTodo);
+    api('PUT', newTodo, this.putTodo);
   }
 
   /**

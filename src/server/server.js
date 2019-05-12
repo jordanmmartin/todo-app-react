@@ -61,7 +61,7 @@ app.delete('/todos/:id', (req, res) => {
   });
   const todo = todos[index]
   if (!todo) {
-    res.status(400).json({ message: 'The Todo with the given ID was not found' });
+    res.status(404).json({ message: 'The Todo with the given ID was not found' });
     return;
   }
   todos.splice(index, 1);
@@ -70,7 +70,19 @@ app.delete('/todos/:id', (req, res) => {
 });
 
 app.put('/todos/:id', (req, res) => {
-  res.status(500).send({ message: 'not implemented' });
+  // res.status(500).send({ message: 'not implemented' });
+  const id = parseInt(req.params.id);
+  const index = todos.findIndex((todo) => {
+    return todo.id === id;
+  });
+  const todo = todos[index]
+  if (!todo) {
+    res.status(404).json({ message: 'The Todo with the given ID was not found' });
+    return;
+  }
+  todo.status = req.body.data.status
+
+  res.status(200).send(todo);
 });
 
 // Node server.

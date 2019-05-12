@@ -9,7 +9,6 @@ export function api(method, data, cb) {
   const promise = getApiPromise(method, data);
 
   promise.then(json => {
-    console.log(json)
     if (typeof cb === 'function') {
       cb(json);
     }
