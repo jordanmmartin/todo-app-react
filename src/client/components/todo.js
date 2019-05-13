@@ -14,36 +14,35 @@ const baseCls = 'todo';
  * Prop Types
  * @private
  */
-// const propTypes = {
-//   filtered: PropTypes.bool,
-//   onClickDelete: PropTypes.func,
-//   onClickTodo: PropTypes.func,
-//   status: PropTypes.string,
-//   text: PropTypes.string,
-// };
+const propTypes = {
+  filtered: PropTypes.bool,
+  onClickDelete: PropTypes.func,
+  onClickTodo: PropTypes.func,
+  status: PropTypes.string,
+  text: PropTypes.string,
+};
 
 /**
  * Default Props
  * @private
  */
-// const defaultProps = {
-//   filtered: false,
-//   onClickDelete: noop,
-//   onClickTodo: noop,
-//   status: '',
-//   text: '',
-// };
+const defaultProps = {
+  filtered: false,
+  onClickDelete: noop,
+  onClickTodo: noop,
+  status: '',
+  text: '',
+};
 
 /**
  * Todo component
  * @returns {ReactElement}
  */
-// const Todo = ({ filtered, onClickDelete, onClickTodo, status, text }) => {
 class Todo extends React.Component {
   /**
    * Base CSS class
    */
-  // static baseCls = 'todo';
+
   state = {
     complete: false,
     currentStatus: ''
@@ -57,13 +56,6 @@ class Todo extends React.Component {
     text: PropTypes.string,
   };
 
-  // checkCompletion = () => {
-  //   if(this.props.status !== 'active'){
-  //     this.setState({
-  //       complete: true
-  //     })
-  //   }
-  // }
 
   checkStatusChange = () => {
     if(this.props.status !== this.state.currentStatus){
@@ -103,13 +95,9 @@ class Todo extends React.Component {
     this.checkStatusChange()
   }
 
-  // static todoCls = baseCls
-  //   + (this.props.status === 'complete' ? ' todo--status-complete' : '')
-  //   + (this.props.filtered ? ' todo--filtered' : '');
 
   render(){
-    // console.log('TODO PROPS', this.props)
-    // console.log('TODO state', this.state)
+
     let baseCls = 'todo';
     let todoCls = baseCls
       + (this.state.complete === true ? ' todo--status-complete' : '')
@@ -134,7 +122,5 @@ class Todo extends React.Component {
   }
 }
 
-// Todo.propTypes = propTypes;
-// Todo.defaultProps = defaultProps;
 
 export default Todo;

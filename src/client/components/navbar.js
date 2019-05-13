@@ -88,7 +88,5 @@ class Navbar extends React.Component {
   }
 }
 
-// Navbar.propTypes = propTypes;
-// Navbar.defaultProps = defaultProps;
 
 export default Navbar;

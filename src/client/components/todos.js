@@ -11,29 +11,27 @@ const noop = () => {};
  * Prop Types
  * @private
  */
-// const propTypes = {
-//   filterBy: PropTypes.string,
-//   todos: PropTypes.arrayOf(PropTypes.object),
-//   updateTodos: PropTypes.func,
-// };
+const propTypes = {
+  filterBy: PropTypes.string,
+  todos: PropTypes.arrayOf(PropTypes.object),
+  updateTodos: PropTypes.func,
+};
 
 /**
  * Default Props
  * @private
  */
-// const defaultProps = {
-//   filterBy: '',
-//   todos: [],
-//   updateTodos: noop,
-// };
+const defaultProps = {
+  filterBy: '',
+  todos: [],
+  updateTodos: noop,
+};
 
 /**
  * Todos component
  * @returns {ReactElement}
  */
 
-//Changed Todos to a class component so it would trigger rerenders when passed new props
-// const Todos = ({ filterBy, todos, updateTodos }) => {
 class Todos extends React.Component {
 
   /**
@@ -107,7 +105,6 @@ class Todos extends React.Component {
   onClickTodo = todo => {
     const newTodo = Object.assign({}, todo);
     newTodo.status = todo.status === 'active' ? 'complete' : 'active';
-    // newTodo.archive = false;
 
     api('PUT', newTodo, this.putTodo);
   }
@@ -116,7 +113,6 @@ class Todos extends React.Component {
     if(todo.status === 'complete'){
       const newTodo = Object.assign({}, todo);
       newTodo.status = 'archived'
-      // newTodo.archive = false;
 
       api('PUT', newTodo, this.putTodo);
     }
@@ -163,7 +159,6 @@ class Todos extends React.Component {
   }
 
   render() {
-    // console.log('todos props', this.props)
     return (
       <ul className={this.baseCls}>
         {this.renderTodos()}
@@ -172,7 +167,5 @@ class Todos extends React.Component {
   }
 };
 
-// Todos.propTypes = propTypes;
-// Todos.defaultProps = defaultProps;
 
 export default Todos;
