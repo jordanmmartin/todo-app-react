@@ -5,8 +5,8 @@
 
 .app form{
   padding: 20px 80px 0px;
-
-
+  display: flex;
+  justify-content: center;
 }
 
 .app form input[type=text] {

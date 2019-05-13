@@ -151,7 +151,7 @@ class Todos extends React.Component {
   }
 
   render() {
-    console.log('todos props', this.props)
+    // console.log('todos props', this.props)
     return (
       <ul className={this.baseCls}>
         {this.renderTodos()}

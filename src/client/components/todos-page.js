@@ -102,7 +102,7 @@ class TodosPage extends React.Component {
    * @returns {ReactElement}
    */
   render() {
-    console.log('todos-page state', this.state)
+    // console.log('todos-page state', this.state)
     return (
       <div className={this.baseCls}>
         <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />

@@ -1,6 +1,8 @@
 // Todo module.
 .todo {
-  cursor: pointer;
+  // cursor: pointer;
+   border-bottom: 1px solid map-get($colors, lightgray);
+   height: 50px;
 
   &--status-complete {
     text-decoration: line-through;
@@ -9,4 +11,12 @@
   &--filtered {
     display: none;
   }
+}
+
+.todo span {
+  cursor: pointer;
+}
+
+.todo .todo-link {
+  width: 100%;
 }
