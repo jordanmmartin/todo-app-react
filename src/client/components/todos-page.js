@@ -149,7 +149,6 @@ class TodosPage extends React.Component {
     } else if (props.match.path === '/archived') {
       filter = 'archived'
     }
-    console.log('Path', filter);
     return(
       <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} handleArchiveAll={this.handleArchiveAll} filter={filter}/>
     )

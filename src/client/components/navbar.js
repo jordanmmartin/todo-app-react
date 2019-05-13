@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from './button';
 import React from 'react';
@@ -54,31 +54,34 @@ class Navbar extends React.Component {
     return (
       <div className={baseCls}>
         <NavLink
-          to="/"
+          to="/all"
           activeClassName={`${baseCls}__item--active`}
           className={`${baseCls}__item`}
           onClick={() => this.props.onClickFilter('')}
         >
           All
         </NavLink>
-        <span
+        <NavLink
+          to="/active"
           className={activeLinkCls}
           onClick={() => this.props.onClickFilter('active')}
         >
-          <Link className="link" to="/active" >Active</Link>
-        </span>
-        <span
+          Active
+        </NavLink>
+        <NavLink
+          to="/completed"
           className={completedLinkCls}
           onClick={() => this.props.onClickFilter('completed')}
         >
-          <Link className="link" to="/completed" >Completed</Link>
-        </span>
-        <span
+          Completed
+        </NavLink>
+        <NavLink
+          to="/archived"
           className={archivedLinkCls}
           onClick={() => this.props.onClickFilter('archived')}
         >
-          <Link className="link" to="/archived" >Archived</Link>
-        </span>
+          Archived
+        </NavLink>
         <Button text='Archive all complete' onClick={this.props.handleArchiveAll}/>
       </div>
     );
