@@ -1,0 +1,32 @@
+.button {
+  background-color: map-get($colors, green);
+  border-radius: 2px;
+  border: none;
+  color: white;
+  padding: 0px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.button:focus {
+  outline: none;
+}
+
+
+.summary .button {
+  background-color: white;
+  color: map-get($colors, primary);
+}
+
+.navbar .button {
+  display: block;
+  float: right;
+}

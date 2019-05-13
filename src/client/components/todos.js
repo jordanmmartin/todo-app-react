@@ -106,10 +106,20 @@ class Todos extends React.Component {
    */
   onClickTodo = todo => {
     const newTodo = Object.assign({}, todo);
-    newTodo.status = todo.status === 'complete' ? 'active' : 'complete';
-    newTodo.archive = false;
+    newTodo.status = todo.status === 'active' ? 'complete' : 'active';
+    // newTodo.archive = false;
 
     api('PUT', newTodo, this.putTodo);
+  }
+
+  onClickArchive = (todo) => {
+    if(todo.status === 'complete'){
+      const newTodo = Object.assign({}, todo);
+      newTodo.status = 'archived'
+      // newTodo.archive = false;
+
+      api('PUT', newTodo, this.putTodo);
+    }
   }
 
   /**
@@ -144,6 +154,7 @@ class Todos extends React.Component {
           filtered={filtered}
           onClickDelete={this.onClickDelete.bind(this, todo)}
           onClickTodo={this.onClickTodo.bind(this, todo)}
+          onClickArchive={this.onClickArchive.bind(this, todo)}
           status={todo.status}
           text={todo.text}
         />

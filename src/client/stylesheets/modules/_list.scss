@@ -24,22 +24,3 @@ li,
   align-items: center;
   width: 100%
 }
-
-
-.todo button {
-  background-color: map-get($colors, green);
-  border-radius: 2px;
-  border: none;
-  color: white;
-  padding: 0px 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  margin: 4px 5px;
-  cursor: pointer;
-}
-
-.todo button:hover {
-  background-color: #45a049;
-}

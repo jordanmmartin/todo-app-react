@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Button from './button';
 import React from 'react';
 
 const noop = () => {};
@@ -69,6 +70,7 @@ const Navbar = ({ filterBy, onClickFilter }) => {
       >
         Archived
       </span>
+      <Button text='Archive all complete'/>
     </div>
   );
 }
