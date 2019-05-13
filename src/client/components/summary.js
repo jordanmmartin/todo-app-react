@@ -10,7 +10,7 @@ const noop = () => {};
  * @private
  */
 const propTypes = {
-  onClick: PropTypes.func,
+  handleCompleteAll: PropTypes.func,
   numRemaining: PropTypes.number,
 };
 
@@ -19,7 +19,7 @@ const propTypes = {
  * @private
  */
 const defaultProps = {
-  onClick: noop,
+  handleCompleteAll: noop,
   numRemaining: 0,
 };
 
@@ -27,7 +27,7 @@ const defaultProps = {
  * Link component
  * @returns {ReactElement}
  */
-const Summary = ({ numRemaining, onClick }) => {
+const Summary = ({ numRemaining, handleCompleteAll }) => {
   /**
    * Base CSS class
    */
@@ -36,7 +36,7 @@ const Summary = ({ numRemaining, onClick }) => {
   return (
     <div className={baseCls}>
       {`${numRemaining} tasks remaining`}
-      <Button text="Complete All" onClick={onClick} />
+      <Button text="Complete All" onClick={handleCompleteAll} />
     </div>
   );
 };

@@ -98,13 +98,43 @@ class TodosPage extends React.Component {
     this.setState({ todos });
   }
 
-  completeAll = () => {
-    console.log('COMPLETE ALL');
+  putTodo = json => {
+    const index = this.state.todos.findIndex(todo => {
+      return todo.id === json.id;
+    });
+
+    this.updateTodos(
+      [
+        ...this.state.todos.slice(0, index),
+        json,
+        ...this.state.todos.slice(index + 1),
+      ]
+    );
   }
 
   countActiveTodos = () => {
     let activeTodos = this.state.todos.filter(todo => todo.status === 'active')
     return activeTodos.length
+  }
+
+  handleCompleteAll = () => {
+    console.log('COMPLETING ALL...');
+    let activeTodos = this.state.todos.filter(todo => todo.status === 'active')
+    console.log(activeTodos);
+    activeTodos.forEach(todo => {
+      const newTodo = Object.assign({}, todo);
+      newTodo.status = 'complete'
+
+      api('PUT', newTodo, this.putTodo);
+    })
+  }
+
+  handleArchiveAll = () => {
+    console.log('Archiving all...');
+    let completedTodos = this.state.todos.filter(todo => todo.status === 'complete')
+    completedTodos.forEach(todo => {
+
+    })
   }
 
   /**
@@ -115,8 +145,8 @@ class TodosPage extends React.Component {
     console.log(this.state.todos);
     return (
       <div className={this.baseCls}>
-        <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
-        <Summary numRemaining={this.countActiveTodos()} onClick={this.completeAll}/>
+        <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} handleArchiveAll={this.handleArchiveAll}/>
+        <Summary numRemaining={this.countActiveTodos()} handleCompleteAll={this.handleCompleteAll}/>
         <TodoForm onSubmit={this.addTodo} />
 
         <Todos

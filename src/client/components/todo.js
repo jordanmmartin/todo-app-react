@@ -45,7 +45,8 @@ class Todo extends React.Component {
    */
   // static baseCls = 'todo';
   state = {
-    complete: false
+    complete: false,
+    currentStatus: ''
   }
 
   static propTypes = {
@@ -64,6 +65,22 @@ class Todo extends React.Component {
     }
   }
 
+  checkStatusChange = () => {
+    if(this.props.status !== this.state.currentStatus){
+      if(this.props.status !== 'active'){
+        this.setState({
+        complete: true,
+        currentStatus: this.props.status
+        })
+      } else {
+        this.setState({
+        complete: false,
+        currentStatus: this.props.status
+        })
+      }
+    }
+  }
+
   handleCheck = () => {
     this.props.onClickTodo()
     if(event.target.checked === true){
@@ -79,8 +96,8 @@ class Todo extends React.Component {
 
 
 
-  componentDidMount() {
-    this.checkCompletion()
+  componentDidUpdate() {
+    this.checkStatusChange()
   }
 
   // static todoCls = baseCls
@@ -97,7 +114,7 @@ class Todo extends React.Component {
     return (
       <li className={todoCls}>
           <div className="pretty p-icon p-rotate">
-              <input type="checkbox" onChange={this.handleCheck} defaultChecked={(this.props.status !== 'active')} />
+              <input type="checkbox" onChange={this.handleCheck} checked={this.state.complete}/>
               <div className="state p-success">
                   <i className="icon mdi mdi-check"></i>
                   <label></label>

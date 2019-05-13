@@ -12,6 +12,7 @@ const noop = () => {};
 const propTypes = {
   filterBy: PropTypes.string,
   onClickFilter: PropTypes.func,
+  handleArchiveAll: PropTypes.func
 };
 
 /**
@@ -21,13 +22,14 @@ const propTypes = {
 const defaultProps = {
   filterBy: '',
   onClickFilter: noop,
+  handleArchiveAll: noop
 };
 
 /**
  * Navbar component
  * @returns {ReactElement}
  */
-const Navbar = ({ filterBy, onClickFilter }) => {
+const Navbar = ({ filterBy, onClickFilter, handleArchiveAll }) => {
   /**
    * Base CSS class
    */
@@ -70,7 +72,7 @@ const Navbar = ({ filterBy, onClickFilter }) => {
       >
         Archived
       </span>
-      <Button text='Archive all complete'/>
+      <Button text='Archive all complete' onClick={handleArchiveAll}/>
     </div>
   );
 }
