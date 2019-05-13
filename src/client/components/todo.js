@@ -115,8 +115,9 @@ class Todo extends React.Component {
               </div>
           </div>
           <TodoLink text={this.props.text} />
-
-          {/* <Button text="Delete" onClick={this.props.onClickDelete} /> */}
+          <div className="archive-button">
+            <Button text="Archive" onClick={this.props.onClickDelete} />
+          </div>
           <span className="mdi mdi-close" onClick={this.props.onClickDelete}></span>
           <hr/>
       </li>

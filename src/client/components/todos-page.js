@@ -8,6 +8,7 @@ import Navbar from './navbar';
 import TodoForm from './todo-form';
 import TodoLink from './todo-link';
 import Todos from './todos';
+import Summary from './summary';
 
 /**
  * TodosPage component
@@ -97,16 +98,25 @@ class TodosPage extends React.Component {
     this.setState({ todos });
   }
 
+  completeAll = () => {
+    console.log('COMPLETE ALL');
+  }
+
+  countActiveTodos = () => {
+    let activeTodos = this.state.todos.filter(todo => todo.status === 'active')
+    return activeTodos.length
+  }
+
   /**
    * Render
    * @returns {ReactElement}
    */
   render() {
-    // console.log('todos-page state', this.state)
+    console.log(this.state.todos);
     return (
       <div className={this.baseCls}>
         <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} />
-
+        <Summary numRemaining={this.countActiveTodos()} onClick={this.completeAll}/>
         <TodoForm onSubmit={this.addTodo} />
 
         <Todos

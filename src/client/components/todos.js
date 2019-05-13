@@ -126,7 +126,7 @@ class Todos extends React.Component {
       let filtered;
       switch (this.props.filterBy) {
         case 'active':
-          filtered = todo.status === 'complete';
+          filtered = todo.status !== 'active';
           break;
         case 'completed':
           filtered = todo.status !== 'complete';
