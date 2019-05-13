@@ -99,8 +99,8 @@ class Todo extends React.Component {
   //   + (this.props.filtered ? ' todo--filtered' : '');
 
   render(){
-    console.log('TODO PROPS', this.props)
-    console.log('TODO state', this.state)
+    // console.log('TODO PROPS', this.props)
+    // console.log('TODO state', this.state)
     let baseCls = 'todo';
     let todoCls = baseCls
       + (this.state.complete === true ? ' todo--status-complete' : '')

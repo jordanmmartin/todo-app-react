@@ -131,6 +131,9 @@ class Todos extends React.Component {
         case 'completed':
           filtered = todo.status !== 'complete';
           break;
+        case 'archived':
+          filtered = todo.status !== 'archived';
+          break;
         default:
           filtered = false;
       }
@@ -139,9 +142,7 @@ class Todos extends React.Component {
         <Todo
           key={todo.id}
           filtered={filtered}
-          // onClickDelete={onClickDelete.bind(this, todo)}
           onClickDelete={this.onClickDelete.bind(this, todo)}
-          // onClickTodo={onClickTodo.bind(this, todo)}
           onClickTodo={this.onClickTodo.bind(this, todo)}
           status={todo.status}
           text={todo.text}
