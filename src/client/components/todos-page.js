@@ -118,9 +118,7 @@ class TodosPage extends React.Component {
   }
 
   handleCompleteAll = () => {
-    console.log('COMPLETING ALL...');
     let activeTodos = this.state.todos.filter(todo => todo.status === 'active')
-    console.log(activeTodos);
     activeTodos.forEach(todo => {
       const newTodo = Object.assign({}, todo);
       newTodo.status = 'complete'
@@ -130,10 +128,12 @@ class TodosPage extends React.Component {
   }
 
   handleArchiveAll = () => {
-    console.log('Archiving all...');
     let completedTodos = this.state.todos.filter(todo => todo.status === 'complete')
     completedTodos.forEach(todo => {
+      const newTodo = Object.assign({}, todo);
+      newTodo.status = 'archived'
 
+      api('PUT', newTodo, this.putTodo);
     })
   }
 
@@ -142,7 +142,6 @@ class TodosPage extends React.Component {
    * @returns {ReactElement}
    */
   render() {
-    console.log(this.state.todos);
     return (
       <div className={this.baseCls}>
         <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} handleArchiveAll={this.handleArchiveAll}/>

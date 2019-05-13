@@ -57,13 +57,13 @@ class Todo extends React.Component {
     text: PropTypes.string,
   };
 
-  checkCompletion = () => {
-    if(this.props.status !== 'active'){
-      this.setState({
-        complete: true
-      })
-    }
-  }
+  // checkCompletion = () => {
+  //   if(this.props.status !== 'active'){
+  //     this.setState({
+  //       complete: true
+  //     })
+  //   }
+  // }
 
   checkStatusChange = () => {
     if(this.props.status !== this.state.currentStatus){
@@ -95,6 +95,9 @@ class Todo extends React.Component {
   }
 
 
+  componentDidMount() {
+    this.checkStatusChange()
+  }
 
   componentDidUpdate() {
     this.checkStatusChange()
