@@ -14,3 +14,8 @@
     color: map-get($colors, darkgray);
   }
 }
+
+.navbar .link {
+  color: map-get($colors, gray);
+  text-decoration: none;
+}

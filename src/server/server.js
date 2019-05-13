@@ -21,6 +21,30 @@ app.get('/', (req, res) => {
   res.render('index', { bundle });
 });
 
+app.get('/all', (req, res) => {
+  const bundle = `//${req.hostname}:8080/public/bundle.js`;
+
+  res.render('index', { bundle });
+});
+
+app.get('/active', (req, res) => {
+  const bundle = `//${req.hostname}:8080/public/bundle.js`;
+
+  res.render('index', { bundle });
+});
+
+app.get('/completed', (req, res) => {
+  const bundle = `//${req.hostname}:8080/public/bundle.js`;
+
+  res.render('index', { bundle });
+});
+
+app.get('/archived', (req, res) => {
+  const bundle = `//${req.hostname}:8080/public/bundle.js`;
+
+  res.render('index', { bundle });
+});
+
 app.get('/todos', (req, res) => {
   res.send(JSON.stringify(todos));
 });

@@ -1,4 +1,5 @@
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
+import { Route, Switch, withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -137,6 +138,23 @@ class TodosPage extends React.Component {
     })
   }
 
+  renderTodos = (props) => {
+    let filter
+    if(props.match.path === '/all'){
+      filter = 'all'
+    } else if (props.match.path === '/active') {
+      filter = 'active'
+    } else if (props.match.path === '/completed') {
+      filter ='completed'
+    } else if (props.match.path === '/archived') {
+      filter = 'archived'
+    }
+    console.log('Path', filter);
+    return(
+      <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} handleArchiveAll={this.handleArchiveAll} filter={filter}/>
+    )
+  }
+
   /**
    * Render
    * @returns {ReactElement}
@@ -144,10 +162,16 @@ class TodosPage extends React.Component {
   render() {
     return (
       <div className={this.baseCls}>
-        <Navbar filterBy={this.state.filterBy} onClickFilter={this.setFilterBy} handleArchiveAll={this.handleArchiveAll}/>
+        <Switch>
+          <Route path="/archived" render={this.renderTodos}/>
+          <Route path="/completed" render={this.renderTodos}/>
+          <Route path="/active" render={this.renderTodos}/>
+          <Route path="/all" render={this.renderTodos}/>
+          <Route path="/" component={this.renderTodos}/>
+        </Switch>
+
         <Summary numRemaining={this.countActiveTodos()} handleCompleteAll={this.handleCompleteAll}/>
         <TodoForm onSubmit={this.addTodo} />
-
         <Todos
           filterBy={this.state.filterBy}
           todos={this.state.todos}
@@ -158,4 +182,4 @@ class TodosPage extends React.Component {
   }
 }
 
-export default TodosPage;
+export default withRouter(TodosPage);

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Button from './button';
 import React from 'react';
@@ -25,59 +25,67 @@ const defaultProps = {
   handleArchiveAll: noop
 };
 
+
+
 /**
  * Navbar component
  * @returns {ReactElement}
  */
-const Navbar = ({ filterBy, onClickFilter, handleArchiveAll }) => {
+// const Navbar = ({ filterBy, onClickFilter, handleArchiveAll, filter }) => {
+class Navbar extends React.Component {
   /**
    * Base CSS class
    */
-  const baseCls = 'navbar'
+  componentDidMount(){
+    this.props.onClickFilter(this.props.filter)
+  }
 
-  let activeLinkCls = `${baseCls}__item`;
-  activeLinkCls += filterBy === 'active' ? ` ${baseCls}__item--active` : '';
+  render() {
+    const baseCls = 'navbar'
 
-  let completedLinkCls = `${baseCls}__item`;
-  completedLinkCls += filterBy === 'completed' ? ` ${baseCls}__item--active` : '';
+    let activeLinkCls = `${baseCls}__item`;
+    activeLinkCls += this.props.filterBy === 'active' ? ` ${baseCls}__item--active` : '';
 
-  let archivedLinkCls = `${baseCls}__item`;
-  archivedLinkCls += filterBy === 'archived' ? ` ${baseCls}__item--active` : '';
+    let completedLinkCls = `${baseCls}__item`;
+    completedLinkCls += this.props.filterBy === 'completed' ? ` ${baseCls}__item--active` : '';
 
-  return (
-    <div className={baseCls}>
-      <NavLink
-        to="/"
-        activeClassName={`${baseCls}__item--active`}
-        className={`${baseCls}__item`}
-        onClick={() => onClickFilter('')}
-      >
-        All
-      </NavLink>
-      <span
-        className={activeLinkCls}
-        onClick={() => onClickFilter('active')}
-      >
-        Active
-      </span>
-      <span
-        className={completedLinkCls}
-        onClick={() => onClickFilter('completed')}
-      >
-        Completed
-      </span>
-      <span
-        className={archivedLinkCls}
-        onClick={() => onClickFilter('archived')}
-      >
-        Archived
-      </span>
-      <Button text='Archive all complete' onClick={handleArchiveAll}/>
-    </div>
-  );
+    let archivedLinkCls = `${baseCls}__item`;
+    archivedLinkCls += this.props.filterBy === 'archived' ? ` ${baseCls}__item--active` : '';
+    return (
+      <div className={baseCls}>
+        <NavLink
+          to="/"
+          activeClassName={`${baseCls}__item--active`}
+          className={`${baseCls}__item`}
+          onClick={() => this.props.onClickFilter('')}
+        >
+          All
+        </NavLink>
+        <span
+          className={activeLinkCls}
+          onClick={() => this.props.onClickFilter('active')}
+        >
+          <Link className="link" to="/active" >Active</Link>
+        </span>
+        <span
+          className={completedLinkCls}
+          onClick={() => this.props.onClickFilter('completed')}
+        >
+          <Link className="link" to="/completed" >Completed</Link>
+        </span>
+        <span
+          className={archivedLinkCls}
+          onClick={() => this.props.onClickFilter('archived')}
+        >
+          <Link className="link" to="/archived" >Archived</Link>
+        </span>
+        <Button text='Archive all complete' onClick={this.props.handleArchiveAll}/>
+      </div>
+    );
+  }
 }
 
-Navbar.propTypes = propTypes;
-Navbar.defaultProps = defaultProps;
+// Navbar.propTypes = propTypes;
+// Navbar.defaultProps = defaultProps;
 
 export default Navbar;
